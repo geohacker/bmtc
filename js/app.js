@@ -9,12 +9,13 @@ $(document).ready(function () {
 	}).addTo(map);
 
     var geojsonMarkerOptions = {
-        radius: 2,
+        radius: 4,
         fillColor: "#000",
         color: "#000",
-        weight: 1,
+        weight: 2,
         opacity: 1,
-        fillOpacity: 0.8
+        fillOpacity: 0.8,
+        popupAnchor:  [0, 0]
     };
     var busstopsSearch = [];
     var busstopsLayer = L.geoJson(busstops, {

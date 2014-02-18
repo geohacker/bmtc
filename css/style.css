@@ -59,18 +59,18 @@ body {
 	margin: -10px 0 0 -110px;
 	z-index: 20001;
 }
-            .has-feedback .form-control-feedback {
-                position: absolute;
-                top: 0;
-                right: 0;
-                display: block;
-                width: 34px;
-                height: 34px;
-                line-height: 34px;
-                text-align: center;
-            }
+.has-feedback .form-control-feedback {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: 34px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+}
 
-/*@media (max-width: 992px) {
+@media (max-width: 992px) {
 	.navbar .navbar-brand {
 		font-size: 18px;
 	}
@@ -83,7 +83,7 @@ body {
 		hyphens: auto;
 	}
 }
-/* Print Handling */
+/* Print Handling 
 @media print {
 	.navbar {
 		display: none !important;
