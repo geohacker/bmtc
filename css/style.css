@@ -1,0 +1,44 @@
+html, body, #map {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+body {
+	padding-top: 50px;
+}
+
+.typeahead {
+	background-color: #FFFFFF;
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 4px;
+	padding: 4px 0;
+	width: 100%;
+	max-height: 300px;
+	overflow: auto;
+}
+.tt-suggestion {
+	font-size: 14px;
+	line-height: 20px;
+	padding: 3px 10px;
+}
+.tt-suggestion.tt-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+.tt-suggestion p {
+	margin: 0;
+}
+.tt-suggestion + .tt-suggestion {
+	border-top: 1px solid #ccc;
+}
+.typeahead-header {
+	margin: 0 5px 5px 5px;
+	padding: 3px 0;
+	border-bottom: 2px solid #333;
+}
