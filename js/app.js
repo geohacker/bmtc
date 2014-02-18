@@ -1,5 +1,3 @@
-$(document).ready(function () {
-
 	var map = L.map('map').setView([13.0000,77.5833], 13);
 
 	L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
@@ -102,9 +100,9 @@ $("#searchbox").typeahead({
 }).on("typeahead:selected", function (obj, datum) {
     if (datum.source === "Busstops") {
         map.fitBounds(datum.bounds);
-        // if (map._layers[datum.id]) {
-            // map._layers[datum.id].fire("click");
-        // };
+        if (map._layers[datum.id]) {
+            map._layers[datum.id].openPopup();
+        };
     };
     if (datum.source === "GeoNames") {
         map.setView([datum.lat, datum.lng], 15);
@@ -122,4 +120,3 @@ $("#searchbox").typeahead({
 $(".twitter-typeahead").css("position", "static");
 $(".twitter-typeahead").css("display", "block");
 
-});
