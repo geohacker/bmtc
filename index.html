@@ -91,7 +91,7 @@ var geojsonMarkerOptions = {
                     },
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     remote: {
-                        url: "http://api.geonames.org/searchJSON?username=geohacker&featureClass=P&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
+                        url: "http://api.geonames.org/searchJSON?username=geohacker&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
                         filter: function (data) {
                             return $.map(data.geonames, function (result) {
                                 return {
@@ -141,7 +141,7 @@ var geojsonMarkerOptions = {
                         map.fitBounds(datum.bounds);
                     };
                     if (datum.source === "GeoNames") {
-                        map.setView([datum.lat, datum.lng], 14);
+                        map.setView([datum.lat, datum.lng], 15);
                     };
                     if ($(".navbar-collapse").height() > 50) {
                         $(".navbar-collapse").collapse("hide");
