@@ -70,7 +70,7 @@ body {
                 text-align: center;
             }
 
-@media (max-width: 992px) {
+/*@media (max-width: 992px) {
 	.navbar .navbar-brand {
 		font-size: 18px;
 	}
@@ -90,4 +90,4 @@ body {
 	}
 	.leaflet-control-container {
 		display: none !important;
-	}
+	}*/
