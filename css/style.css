@@ -42,3 +42,52 @@ body {
 	padding: 3px 0;
 	border-bottom: 2px solid #333;
 }
+.navbar .navbar-brand {
+	font-weight: bold;
+	font-size: 25px;
+	color: white;
+}
+.navbar-collapse.in {
+	overflow-y: hidden;
+}
+#loading {
+	position: absolute;
+	width: 220px;
+	height: 19px;
+	top: 50%;
+	left: 50%;
+	margin: -10px 0 0 -110px;
+	z-index: 20001;
+}
+            .has-feedback .form-control-feedback {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: block;
+                width: 34px;
+                height: 34px;
+                line-height: 34px;
+                text-align: center;
+            }
+
+@media (max-width: 992px) {
+	.navbar .navbar-brand {
+		font-size: 18px;
+	}
+}
+@media (max-width: 767px){
+	.url-break {
+		word-break: break-all;
+		word-break: break-word;
+		-webkit-hyphens: auto;
+		hyphens: auto;
+	}
+}
+/* Print Handling */
+@media print {
+	.navbar {
+		display: none !important;
+	}
+	.leaflet-control-container {
+		display: none !important;
+	}

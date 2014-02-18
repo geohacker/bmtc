@@ -5,41 +5,46 @@
 <head>
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-	 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="assets/typeahead/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-	<script src="data/busstops.js"></script>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <script src="data/busstops.js"></script>
 </head>
 
 <body>
-	        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Bangalore MTC Bus Stops</a>
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Bangalore MTC Bus Stops</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group has-feedback navbar-right">
+                <input id="searchbox" type="text" placeholder="Search" class="form-control">
+                <span id="searchicon" class="fa fa-search form-control-feedback"></span>
             </div>
-            <div class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group has-feedback navbar-right">
-                        <input id="searchbox" type="text" placeholder="Search" class="form-control">
-                        <span id="searchicon" class="fa fa-search form-control-feedback"></span>
-                    </div>
-                </form>
-                <ul class="nav navbar-nav">
-                </ul>
-            </div><!--/.navbar-collapse -->
-        </div>
-	<div id="map"></div>
+        </form>
+        <ul class="nav navbar-nav"></ul>
+    </div><!--/.navbar-collapse -->
+</div>
+<div id="map"></div>
+
 </body>
 
 <script type="text/javascript">
+
+$(document).ready(function () {
+
 	var map = L.map('map').setView([13.0000,77.5833], 13);
 
 	L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
@@ -48,74 +53,76 @@
 		subdomains: ['otile1', 'otile2', 'otile3']
 	}).addTo(map);
 
-var geojsonMarkerOptions = {
-    radius: 2,
-    fillColor: "#000",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-};
-	// console.log(busstops);
-	var busstopsSearch = [];
-	var busstopsLayer = L.geoJson(busstops, {
-		pointToLayer: function(feature, latlng) {
-			return L.circleMarker(latlng, geojsonMarkerOptions);
-		},
-        onEachFeature: function (feature, layer) {
-            busstopsSearch.push({
-                name: layer.feature.properties.name,
-                source: "Busstops",
-                id: L.stamp(layer),
-                bounds: layer.getBounds()
+    var geojsonMarkerOptions = {
+        radius: 2,
+        fillColor: "#000",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+    var busstopsSearch = [];
+    var busstopsLayer = L.geoJson(busstops, {
+      pointToLayer: function(feature, latlng) {
+         return L.circleMarker(latlng, geojsonMarkerOptions);
+     },
+     onEachFeature: function (feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name, {
+                closeButton: false
+            });
+        };
+        busstopsSearch.push({
+            name: layer.feature.properties.name,
+            source: "Busstops",
+            id: L.stamp(layer),
+            bounds: layer.getBounds()
+        });
+    }
+}).addTo(map);
+
+    var busstopsBH = new Bloodhound({
+        name: "Busstops",
+        datumTokenizer: function (d) {
+            return Bloodhound.tokenizers.whitespace(d.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: busstopsSearch,
+        limit: 10
+    });
+
+    var geonamesBH = new Bloodhound({
+        name: "GeoNames",
+        datumTokenizer: function (d) {
+            return Bloodhound.tokenizers.whitespace(d.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: "http://api.geonames.org/searchJSON?username=geohacker&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
+            filter: function (data) {
+                return $.map(data.geonames, function (result) {
+                    return {
+                        name: result.name + ", " + result.adminCode1,
+                        lat: result.lat,
+                        lng: result.lng,
+                        source: "GeoNames"
+                    };
                 });
+            },
+            ajax: {
+                beforeSend: function (jqXhr, settings) {
+                    settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
+                    $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
+                },
+                complete: function (jqXHR, status) {
+                    $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
+                }
             }
-	}).addTo(map);
-
-            $(document).ready(function () {
-
-                var busstopsBH = new Bloodhound({
-                    name: "Busstops",
-                    datumTokenizer: function (d) {
-                        return Bloodhound.tokenizers.whitespace(d.name);
-                    },
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    local: busstopsSearch,
-                    limit: 10
-                });
-
-                var geonamesBH = new Bloodhound({
-                    name: "GeoNames",
-                    datumTokenizer: function (d) {
-                        return Bloodhound.tokenizers.whitespace(d.name);
-                    },
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    remote: {
-                        url: "http://api.geonames.org/searchJSON?username=geohacker&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
-                        filter: function (data) {
-                            return $.map(data.geonames, function (result) {
-                                return {
-                                    name: result.name + ", " + result.adminCode1,
-                                    lat: result.lat,
-                                    lng: result.lng,
-                                    source: "GeoNames"
-                                };
-                            });
-                        },
-                        ajax: {
-                            beforeSend: function (jqXhr, settings) {
-                                settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
-                                $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
-                            },
-                            complete: function (jqXHR, status) {
-                                $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
-                            }
-                        }
-                    },
-                    limit: 10
-                });
-                busstopsBH.initialize();
-                geonamesBH.initialize();
+        },
+        limit: 10
+    });
+busstopsBH.initialize();
+geonamesBH.initialize();
 
                 // instantiate the typeahead UI
                 $("#searchbox").typeahead({
@@ -139,6 +146,9 @@ var geojsonMarkerOptions = {
                 }).on("typeahead:selected", function (obj, datum) {
                     if (datum.source === "Busstops") {
                         map.fitBounds(datum.bounds);
+                        // if (map._layers[datum.id]) {
+                            // map._layers[datum.id].fire("click");
+                        // };
                     };
                     if (datum.source === "GeoNames") {
                         map.setView([datum.lat, datum.lng], 15);
