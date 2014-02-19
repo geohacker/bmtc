@@ -18,7 +18,15 @@
     var busstopsSearch = [];
     var busstopsLayer = L.geoJson(busstops, {
       pointToLayer: function(feature, latlng) {
-       return L.circleMarker(latlng, geojsonMarkerOptions);
+       return L.circleMarker(latlng, {
+        radius: 5,
+        fillColor: "#fff",
+        color: "#267fca",
+        weight: 3,
+        opacity: 1,
+        strokeWidth: 3,
+        fillOpacity: 0.8
+       });
    },
    onEachFeature: function (feature, layer) {
     if (feature.properties && feature.properties.name) {
