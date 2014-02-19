@@ -1,88 +1,93 @@
-	var map = L.map('map').setView([13.0000,77.5833], 13);
+var map = L.map('map').setView([13.0000,77.5833], 13);
 
-	L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>, <a href="http://mapquest.com">MapQuest</a>, <a href="http://openbangalore.org">Open Bangalore</a>',
-		maxZoom: 18,
-		subdomains: ['otile1', 'otile2', 'otile3']
-	}).addTo(map);
-
-    var geojsonMarkerOptions = {
-        radius: 4,
-        fillColor: "#000",
-        color: "#000",
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.8,
-        popupAnchor:  [0, 0]
-    };
-    var busstopsSearch = [];
-    var busstopsLayer = L.geoJson(busstops, {
-      pointToLayer: function(feature, latlng) {
-       return L.circleMarker(latlng, {
-        radius: 5,
-        fillColor: "#fff",
-        color: "#267fca",
-        weight: 3,
-        opacity: 1,
-        strokeWidth: 3,
-        fillOpacity: 0.8
-       });
-   },
-   onEachFeature: function (feature, layer) {
-    if (feature.properties && feature.properties.name) {
-        layer.bindPopup(feature.properties.name, {
-            closeButton: false
-        });
-    };
-    busstopsSearch.push({
-        name: layer.feature.properties.name,
-        source: "Busstops",
-        id: L.stamp(layer),
-        bounds: layer.getBounds()
-    });
-}
+L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a>, <a href="http://mapquest.com">MapQuest</a>, <a href="http://openbangalore.org">Open Bangalore</a>',
+	maxZoom: 18,
+	subdomains: ['otile1', 'otile2', 'otile3']
 }).addTo(map);
 
-    var busstopsBH = new Bloodhound({
-        name: "Busstops",
-        datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
-        },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: busstopsSearch,
-        limit: 10
-    });
+var geojsonMarkerOptions = {
+    radius: 4,
+    fillColor: "#000",
+    color: "#000",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8,
+    popupAnchor:  [0, 0]
+};
 
-    var geonamesBH = new Bloodhound({
-        name: "GeoNames",
-        datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+var busstopsSearch = [];
+
+var busstopsLayer = L.geoJson(busstops, {
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, {
+            radius: 5,
+            fillColor: "#fff",
+            color: "#267fca",
+            weight: 3,
+            opacity: 1,
+            strokeWidth: 3,
+            fillOpacity: 0.8
+        });
+    },
+
+    onEachFeature: function (feature, layer) {
+        if (feature.properties && feature.properties.name) {
+            layer.bindPopup(feature.properties.name, {
+                closeButton: false
+            });
+        };
+        busstopsSearch.push({
+            name: layer.feature.properties.name,
+            source: "Busstops",
+            id: L.stamp(layer),
+            bounds: layer.getBounds()
+        });
+    }
+}).addTo(map);
+
+var busstopsBH = new Bloodhound({
+    name: "Busstops",
+
+    datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+    },
+
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: busstopsSearch,
+    limit: 10
+});
+
+var geonamesBH = new Bloodhound({
+    name: "GeoNames",
+    datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+        url: "http://api.geonames.org/searchJSON?username=geohacker&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
+        filter: function (data) {
+            return $.map(data.geonames, function (result) {
+                return {
+                    name: result.name + ", " + result.adminCode1,
+                    lat: result.lat,
+                    lng: result.lng,
+                    source: "GeoNames"
+                };
+            });
         },
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: "http://api.geonames.org/searchJSON?username=geohacker&maxRows=5&countryCode=IN&name_startsWith=%QUERY",
-            filter: function (data) {
-                return $.map(data.geonames, function (result) {
-                    return {
-                        name: result.name + ", " + result.adminCode1,
-                        lat: result.lat,
-                        lng: result.lng,
-                        source: "GeoNames"
-                    };
-                });
+        ajax: {
+            beforeSend: function (jqXhr, settings) {
+                settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
+                $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
             },
-            ajax: {
-                beforeSend: function (jqXhr, settings) {
-                    settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
-                    $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
-                },
-                complete: function (jqXHR, status) {
-                    $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
-                }
+            complete: function (jqXHR, status) {
+                $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
             }
-        },
-        limit: 10
-    });
+        }
+    },
+    limit: 10
+});
 busstopsBH.initialize();
 geonamesBH.initialize();
 
