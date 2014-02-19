@@ -42,10 +42,14 @@ body {
 	padding: 3px 0;
 	border-bottom: 2px solid #333;
 }
+.navbar {
+    color: #eee;
+    border-bottom: 1px solid #aaa;
+}
 .navbar .navbar-brand {
 	font-weight: bold;
 	font-size: 25px;
-	color: white;
+	color: #777;
 }
 .navbar-collapse.in {
 	overflow-y: hidden;
