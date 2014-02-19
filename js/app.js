@@ -120,3 +120,10 @@ $("#searchbox").typeahead({
 $(".twitter-typeahead").css("position", "static");
 $(".twitter-typeahead").css("display", "block");
 
+map.locate();
+map.on('locationfound', function (l) {
+    console.log(l);
+    var youMarker = L.marker(l.latlng).addTo(map);
+    youMarker.bindPopup("<b>You're here.</b>").openPopup();
+    map.setView(l.latlng, 17);
+});
