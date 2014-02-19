@@ -83,11 +83,11 @@ body {
 		hyphens: auto;
 	}
 }
-/* Print Handling 
+/* Print Handling
 @media print {
-	.navbar {
-		display: none !important;
-	}
-	.leaflet-control-container {
-		display: none !important;
-	}*/
+   .navbar {
+   display: none !important;
+}
+leaflet-control-container {
+   display: none !important;
+}*/
