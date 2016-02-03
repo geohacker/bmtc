@@ -5,7 +5,7 @@ import datetime
 
 # Take routes, find first_departure, first_arrival, last_departure, last_arrival, duration and avg speed
 
-i = csv.DictReader(open('data/trips.csv', 'r'))
+i = csv.DictReader(open('data/routes.2015.csv', 'r'))
 
 newrow = {
     'type': 'FeatureCollection',
