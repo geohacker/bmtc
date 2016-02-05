@@ -4,6 +4,8 @@ Bangalore Metropolitain Transport Corporation Network Data
 [Bangalore Metropolitan Transport Corporation](https://en.wikipedia.org/wiki/Bangalore_Metropolitan_Transport_Corporation) operates over 2000 routes. We [scraped](https://github.com/openbangalore/bmtc) some of the data to understand this network better.
 This repository is a collection of scripts to run analysis and data derived from them.
 
+*[Data from Open Bangalore.](http://openbangalore.org/) | [DataMeet](http://datameet.org/)*
+
 Maps
 ====
 
