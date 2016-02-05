@@ -2,8 +2,8 @@ import json
 
 # Get clean readable names for bus stops.
 
-i = json.load(open('busstops.geojson', 'r'))
-o = open('busstops_clean_names.json', 'w')
+i = json.load(open('data/busstops.2015.geojson', 'r'))
+o = open('data/busstops.2015.clean.json', 'w')
 
 stops = {
     'type': 'FeatureCollection',
