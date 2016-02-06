@@ -39,7 +39,7 @@ Maps
 
 ![screen shot 2016-02-04 at 5 50 33 pm](https://cloud.githubusercontent.com/assets/371666/12845827/91a5a94c-cc2e-11e5-9a45-1c0fb69c28b3.png)
 
-*Node density - number of bus stops passing through a stop. [View interactive map](https://api.mapbox.com/styles/v1/arunasank/cik7yec2z00iv9um6nnanuexa.html?title=true&access_token=pk.eyJ1IjoiYXJ1bmFzYW5rIiwiYSI6ImRKNlNQa3MifQ.SIx-g-J1oWWlP4grTXopcg#11.01/12.9548/77.5782)*
+*Node strength - number of routes passing through a stop. [View interactive map](https://api.mapbox.com/styles/v1/arunasank/cik7yec2z00iv9um6nnanuexa.html?title=true&access_token=pk.eyJ1IjoiYXJ1bmFzYW5rIiwiYSI6ImRKNlNQa3MifQ.SIx-g-J1oWWlP4grTXopcg#11.01/12.9548/77.5782)*
 
 ![screen shot 2016-02-05 at 16 01 41](https://cloud.githubusercontent.com/assets/371666/12845786/54721060-cc2e-11e5-92a7-8c92b54f35b1.png)
 
