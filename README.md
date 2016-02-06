@@ -17,7 +17,7 @@ Maps
 
 *BMTC operates many long routes. The longest is route 600 with 117 km and takes over 5 hours. [View interactive map.](https://api.mapbox.com/styles/v1/geohacker/cik0utr150130bfm2jjfto236.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#10.88/12.9119/77.6292)*
 
-![](https://cloud.githubusercontent.com/assets/371666/12865428/145dd39e-ccd1-11e5-95c8-996455336420.png)
+![](https://cloud.githubusercontent.com/assets/371666/12865441/911404c6-ccd1-11e5-9864-14745fe96cac.png)
 
 *Route KBS-3A makes 274 trips. 401M and 252F makes 217 trips. These are the three most frequent routes. [View interactive map.](https://api.mapbox.com/styles/v1/geohacker/cik1h9fwu017kbpm3t34v9hw3.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#12.07/12.9703/77.5287)*
 
