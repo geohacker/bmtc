@@ -44,3 +44,7 @@ Maps
 ![screen shot 2016-02-05 at 16 01 41](https://cloud.githubusercontent.com/assets/371666/12845786/54721060-cc2e-11e5-92a7-8c92b54f35b1.png)
 
 *Reachability - destinations you can get to from a stop without switching. [View interactive map.](https://api.mapbox.com/styles/v1/geohacker/cik98dpzk0005cilxrc9fhiih.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#10.8/12.9915/77.5707)*
+
+![](https://cloud.githubusercontent.com/assets/371666/12871945/eb837b22-cdb6-11e5-9445-e9f5c3f3371d.png)
+
+*Redundancy - naive approach to finding redundancy is scoring based on bus stops each routes hit. The southern corridor of Majestic - Bannerghatta - Anekal is more redundant than rest of the network*
