@@ -47,4 +47,4 @@ Maps
 
 ![](https://cloud.githubusercontent.com/assets/371666/12871945/eb837b22-cdb6-11e5-9445-e9f5c3f3371d.png)
 
-*Redundancy - naive approach to finding redundancy is scoring based on bus stops each routes hit. The southern corridor of Majestic - Bannerghatta - Anekal is more redundant than rest of the network*
+*Redundancy - naive approach to finding redundancy is scoring based on bus stops each routes hit. The southern corridor of Majestic - Bannerghatta - Anekal is more redundant than rest of the network. [View interactive map.](https://api.mapbox.com/styles/v1/geohacker/cikcasmhz003zkqlxy5fnomod.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#9.87/12.9484/77.6028)*
