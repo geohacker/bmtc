@@ -48,3 +48,7 @@ Maps
 ![](https://cloud.githubusercontent.com/assets/371666/12871945/eb837b22-cdb6-11e5-9445-e9f5c3f3371d.png)
 
 *Redundancy - naive approach to finding redundancy is scoring based on bus stops each routes hit. The southern corridor of Majestic - Bannerghatta - Anekal is more redundant than rest of the network. [View interactive map.](https://api.mapbox.com/styles/v1/geohacker/cikcasmhz003zkqlxy5fnomod.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#9.87/12.9484/77.6028)*
+
+![screen shot 2016-02-08 at 14 39 28](https://cloud.githubusercontent.com/assets/371666/12881731/11810842-ce72-11e5-96cf-f2026a01e406.png)
+
+*School walkability - schools (red) that are <500m from a bus stop (black) on a BMTC route. BMTC creates a pretty good network in and around the city to connect schools. Schools data from Karnatak Learning Partnership. [View interactive map](https://api.mapbox.com/styles/v1/geohacker/cikct6n5o009gb8m9v9nccqf3.html?title=true&access_token=pk.eyJ1IjoiZ2VvaGFja2VyIiwiYSI6ImFIN0hENW8ifQ.GGpH9gLyEg0PZf3NPQ7Vrg#12.92/12.9738/77.5637)*
