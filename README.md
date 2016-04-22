@@ -52,9 +52,9 @@ Maps
 
 *2 series routes coverage*
 
-![screen shot 2016-02-04 at 5 50 33 pm](https://cloud.githubusercontent.com/assets/371666/12845827/91a5a94c-cc2e-11e5-9a45-1c0fb69c28b3.png)
-
 ### Node strength
+
+![screen shot 2016-02-04 at 5 50 33 pm](https://cloud.githubusercontent.com/assets/371666/12845827/91a5a94c-cc2e-11e5-9a45-1c0fb69c28b3.png)
 
 (https://cloud.githubusercontent.com/assets/371666/12845827/91a5a94c-cc2e-11e5-9a45-1c0fb69c28b3.png)
 
