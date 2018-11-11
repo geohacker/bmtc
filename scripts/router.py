@@ -5,7 +5,7 @@ import datetime
 
 # Take routes, find first_departure, first_arrival, last_departure, last_arrival, duration and avg speed
 
-i = csv.DictReader(open('data/routes.2015.csv', 'r'))
+i = csv.DictReader(open('data/routes.2018.csv', 'r'))
 
 newrow = {
     'type': 'FeatureCollection',
@@ -31,9 +31,10 @@ for row in i:
     departures_destination = row['departure_from_destination'].split(',')
     arrivals_destination = row['arrival_at_destination'].split(',')
 
+
     first_departure = departures_origin[0].strip(' ')
-    if first_departure.startswith("00"):
-        first_departure = departures_origin[1].strip(' ')
+    # if first_departure.startswith("00"):
+    #     first_departure = departures_origin[1].strip(' ')
 
     feature['properties']['first_departure'] = first_departure
     feature['properties']['last_departure'] = departures_origin[-1].strip(' ')
